@@ -12,9 +12,10 @@ namespace Minigolf
 		protected void DrawArrow( SceneObject obj, Vector3 startPos, Vector3 endPos, Vector3 direction, Vector3 size, Color color, bool drawTip )
 		{
 			var vertexBuffer = Render.GetDynamicVB( true );
-
+			
+			// We need the relative position not the absolute
 			var offset = endPos - startPos;
-
+			
 			// Line
 			Vertex a = new( -size, Vector3.Up, Vector3.Right, new Vector4( 0, 1, 0, 0 ) );
 			Vertex b = new( size, Vector3.Up, Vector3.Right, new Vector4( 1, 1, 0, 0 ) );
@@ -56,14 +57,16 @@ namespace Minigolf
 
 			var startPos = Position;
 			var endPos = Position += Direction * Power * 100;
+
 			var offset = Vector3.Cross( Direction, Vector3.Up ) * (1 + 2 * Power);
 
+			// Trace to check if we go against a wall
 			var trace = Trace.Ray( startPos, endPos );
 			var result = trace.Run();
 
 			var remainingLength = (result.EndPos - endPos).Length;
 
-			// Draw single arrow if no trace
+			// Draw single arrow if no trace/no reflection
 			if ( remainingLength.AlmostEqual(0.0f) )
 			{
 				var color = ColorConvert.HSLToRGB( 120 - (int)(Power * Power * 120), 1.0f, 0.5f );
