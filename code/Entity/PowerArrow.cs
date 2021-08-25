@@ -16,7 +16,7 @@ namespace Minigolf
 			var offset = endPos - startPos;
 
 			// Line
-			Vertex a = new( size, Vector3.Up, Vector3.Right, new Vector4( 0, 1, 0, 0 ) );
+			Vertex a = new( -size, Vector3.Up, Vector3.Right, new Vector4( 0, 1, 0, 0 ) );
 			Vertex b = new( size, Vector3.Up, Vector3.Right, new Vector4( 1, 1, 0, 0 ) );
 			Vertex c = new( offset + size, Vector3.Up, Vector3.Right, new Vector4( 1, 0, 0, 0 ) );
 			Vertex d = new( offset - size, Vector3.Up, Vector3.Right, new Vector4( 0, 0, 0, 0 ) );
