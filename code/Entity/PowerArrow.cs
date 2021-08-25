@@ -13,11 +13,13 @@ namespace Minigolf
 		{
 			var vertexBuffer = Render.GetDynamicVB( true );
 
+			var offset = endPos - startPos;
+
 			// Line
-			Vertex a = new( startPos - size, Vector3.Up, Vector3.Right, new Vector4( 0, 1, 0, 0 ) );
-			Vertex b = new( startPos + size, Vector3.Up, Vector3.Right, new Vector4( 1, 1, 0, 0 ) );
-			Vertex c = new( endPos + size, Vector3.Up, Vector3.Right, new Vector4( 1, 0, 0, 0 ) );
-			Vertex d = new( endPos - size, Vector3.Up, Vector3.Right, new Vector4( 0, 0, 0, 0 ) );
+			Vertex a = new( size, Vector3.Up, Vector3.Right, new Vector4( 0, 1, 0, 0 ) );
+			Vertex b = new( size, Vector3.Up, Vector3.Right, new Vector4( 1, 1, 0, 0 ) );
+			Vertex c = new( offset + size, Vector3.Up, Vector3.Right, new Vector4( 1, 0, 0, 0 ) );
+			Vertex d = new( offset - size, Vector3.Up, Vector3.Right, new Vector4( 0, 0, 0, 0 ) );
 
 			vertexBuffer.Add( a );
 			vertexBuffer.Add( b );
@@ -30,9 +32,9 @@ namespace Minigolf
 			if (drawTip)
 			{
 				// Add the arrow tip
-				Vertex e = new( endPos + size * 2, Vector3.Up, Vector3.Right, new Vector4( 1, 0, 0, 0 ) );
-				Vertex f = new( endPos - size * 2, Vector3.Up, Vector3.Right, new Vector4( 0, 0, 0, 0 ) );
-				Vertex g = new( endPos + direction * 16 * Power, Vector3.Up, Vector3.Right, new Vector4( 1, 0, 0, 0 ) );
+				Vertex e = new( offset + size * 2, Vector3.Up, Vector3.Right, new Vector4( 1, 0, 0, 0 ) );
+				Vertex f = new( offset - size * 2, Vector3.Up, Vector3.Right, new Vector4( 0, 0, 0, 0 ) );
+				Vertex g = new( offset + direction * 16 * Power, Vector3.Up, Vector3.Right, new Vector4( 1, 0, 0, 0 ) );
 
 				vertexBuffer.Add( e );
 				vertexBuffer.Add( f );
